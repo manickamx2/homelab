@@ -1,0 +1,22 @@
+- name: Base OS setup for nodes
+  hosts: k3s_nodes
+  become: yes
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Upgrade all packages
+      apt:
+        upgrade: dist
+    
+    - name: Install common packages
+      apt:
+        name:
+          - curl
+          - ca-certificates
+          - gnupg
+          - apt-transport-https
+        state: present
