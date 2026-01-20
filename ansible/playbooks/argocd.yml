@@ -1,0 +1,6 @@
+---
+- name: Install ArgoCD against k3s node
+  hosts: localhost
+  roles:
+    - argocd
+

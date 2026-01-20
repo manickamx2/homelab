@@ -1,0 +1,4 @@
+# Install using:
+# $ ansible-galaxy install -r <path to this file>
+collections:
+  - name: kubernetes.core
