@@ -3,3 +3,8 @@
   kubernetes.core.k8s:
     state: present
     definition: "{{ lookup('template', 'homelab-secret.yaml.j2') }}"
+
+- name: Create App-of-Apps homelab-root-application in ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'root-app.yaml.j2') }}"
