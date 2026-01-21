@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alphav1
+kind: Application
+metadata:
+  name: homelab-root-application
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/manickamx2/homelab
+    targetRevision: main
+    path: apps
+  destination:
+    name: in-cluster
+    namespace: argocd
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

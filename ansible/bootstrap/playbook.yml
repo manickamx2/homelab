@@ -1,0 +1,6 @@
+- name: Bootstrap homelab GitHub App credentials w/ ArgoCD
+  hosts: localhost
+  vars_files:
+    - vault.yml
+  roles:
+    - argocd_bootstrap
