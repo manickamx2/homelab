@@ -1,0 +1,5 @@
+- name: Install HAProxy Ingress Controller
+  kubernetes.core.k8s:
+    kubeconfig: "{{ kubeconfig }}"
+    state: present
+    src: haproxy-ingress.yaml
