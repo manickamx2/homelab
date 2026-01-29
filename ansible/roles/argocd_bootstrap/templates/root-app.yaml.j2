@@ -1,21 +1,31 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
   name: homelab-root-application
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/manickamx2/homelab
-    targetRevision: main
-    path: apps
-  destination:
-    name: in-cluster
-    namespace: argocd
-  syncPolicy:
-    automated:
-      enabled: true
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  generators:
+    git:
+      repoURL: https://github.com/manickamx2/homelab
+      revision: main
+      directories:
+        - path: "apps/**"
+  template:
+    metadata:
+      name: "{{path.basename}}-app"
+      namespace: argocd
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/manickamx2/homelab
+        targetRevision: main
+        path: "{{path}}"
+      destination:
+        name: in-cluster
+        namespace: "{{path.basename}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
