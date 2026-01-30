@@ -4,6 +4,7 @@ metadata:
   name: argocd
   namespace: argocd
 spec:
+  ingressClassName: haproxy
   rules:
     - host: argocd.manickam.local
       http:
