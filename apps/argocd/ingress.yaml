@@ -4,7 +4,7 @@ metadata:
   name: argocd
   namespace: argocd
   annotations:
-    haproxy.org/rate-limit-requests: 15
+    haproxy.org/rate-limit-requests: "15"
 spec:
   ingressClassName: haproxy
   rules:
