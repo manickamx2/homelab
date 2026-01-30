@@ -3,10 +3,7 @@ kind: Ingress
 metadata:
   name: argocd
   namespace: argocd
-  annotations:
-    kubernetes.io/ingress.class: haproxy # HAProxy Ingress Controller picks this up
 spec:
-  ingressClassName: haproxy
   rules:
     - host: argocd.manickam.local
       http:
