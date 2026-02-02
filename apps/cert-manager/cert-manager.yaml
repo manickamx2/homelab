@@ -10,11 +10,8 @@ spec:
       targetRevision: v1.19.2
       helm:
         releaseName: cert-manager
-        values: |
-          installCRDs: true
-          global:
-            priorityClassName: "system-cluster-critical"
-          replicas: 1
+        valueFiles:
+          - values.yaml
   destination:
     name: in-cluster
     namespace: cert-manager
