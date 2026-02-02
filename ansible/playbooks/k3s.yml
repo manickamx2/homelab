@@ -37,14 +37,6 @@
       args:
         creates: /usr/local/bin/k3s
     
-    - name: Install Gateway API CRDs
-      kubernetes.core.k8s:
-        state: present
-        src: https://github.com/kubernetes-sigs/gateway-api/releases/download/v1.4.1/standard-install.yaml
-        kubeconfig: "{{ playbook_dir }}/../../kubeconfig.yaml"
-      delegate_to: localhost
-      become: false
-    
     - name: Restart k3s if config changed
       systemd:
         name: k3s

@@ -3,6 +3,7 @@
   vars:
     kubeconfig_path: "{{ playbook_dir }}/../../kubeconfig.yaml"
     gateway_api_version: "v1.4.1"
+    cilium_version: "1.18.6"
   vars_files:
     - vault.yml
   roles:

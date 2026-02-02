@@ -14,6 +14,36 @@
   environment:
     KUBECONFIG: "{{ kubeconfig_path }}"
 
+- name: Add Cilium Helm repo
+  kubernetes.core.helm_repository:
+    name: cilium
+    repo_url: https://helm.cilium.io/
+
+- name: Install Cilium
+  kubernetes.core.helm:
+    name: cilium
+    chart_ref: cilium/cilium
+    release_namespace: kube-system
+    values:
+      version: "{{ cilium_version }}"
+      kubeProxyReplacement: true
+      k8sServiceHost: "{{ hostvars['localhost']['k3s_server_ip'] }}"
+      k8sServicePort: 6443
+      gatewayAPI:
+        enabled: true
+      replicas: 1
+      ipam:
+        operator:
+          clusterPoolIPv4PodCIDRList: 10.42.0.0/16
+      # optionally enable L2 announcements for LoadBalancer IPs
+      l2announcements:
+        enabled: true
+
+- name: Create L2 announcement policy for Cilium
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'l2-policy.yaml.j2') }}"
+
 # Apply the templated Secret in homelab/ansible/roles/argocd_bootstrap/templates/homelab-secret.yaml.j2
 - name: Apply GitHub App repo credentials to ArgoCD
   kubernetes.core.k8s:

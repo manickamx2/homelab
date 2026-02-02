@@ -1,0 +1,22 @@
+apiVersion: cilium.io/v2alpha1
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: main-l2-policy
+spec:
+  # This targets the pool you already created
+  externalIPs: true
+  loadBalancerIPs: true
+  # You can limit this to specific nodes if you want
+  nodeSelector:
+    matchExpressions:
+      - key: kubernetes.io/hostname
+        operator: Exists
+---
+apiVersion: cilium.io/v2alpha1
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: home-network-pool
+spec:
+  blocks:
+    - cidr: 192.168.1.50/30
+  serviceSelector: {} # This selects ALL services of type LoadBalancer
