@@ -1,6 +1,9 @@
-- name: Bootstrap homelab GitHub App credentials w/ ArgoCD
+- name: Bootstrap cluster-wide resources
   hosts: localhost
+  vars:
+    kubeconfig_path: "{{ playbook_dir }}/../../kubeconfig.yaml"
+    gateway_api_version: "v1.4.1"
   vars_files:
     - vault.yml
   roles:
-    - argocd_bootstrap
+    - cluster_bootstrap

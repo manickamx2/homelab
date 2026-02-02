@@ -1,0 +1,27 @@
+- name: Verify kubeconfig exists
+  stat:
+    path: "{{ kubeconfig_path }}"
+  register: kubeconfig_stat
+
+- name: Fail if kubeconfig is missing
+  fail:
+    msg: "kubeconfig.yaml not found at {{ kubeconfig_path }}"
+  when: not kubeconfig_stat.stat.exists
+
+- name: Install Gateway API CRDs
+  shell: |
+    kubectl apply -f https://github.com/kubernetes-sigs/gateway-api/releases/download/{{ gateway_api_version }}/standard-install.yaml
+  environment:
+    KUBECONFIG: "{{ kubeconfig_path }}"
+
+# Apply the templated Secret in homelab/ansible/roles/argocd_bootstrap/templates/homelab-secret.yaml.j2
+- name: Apply GitHub App repo credentials to ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'homelab-secret.yaml.j2') }}"
+
+- name: Create App-of-Apps homelab-root-application in ArgoCD
+  kubernetes.core.k8s:
+    state: present
+    definition: "{{ lookup('template', 'root-app.yaml.j2') }}"
+    
