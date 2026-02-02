@@ -9,3 +9,6 @@ helmCharts:
       featureGates: NameConstraints=true
       webhook:
         featureGates: NameConstraints=true
+
+resources:
+  - ./resources/clusterissuer.yaml
