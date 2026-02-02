@@ -1,3 +1,0 @@
-installCRDs: true
-global:
-  priorityClassName: "system-cluster-critical"
