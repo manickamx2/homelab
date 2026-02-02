@@ -10,7 +10,7 @@ spec:
       targetRevision: v1.19.2
       helm:
         releaseName: cert-manager
-        valuesInline:
+        values: |
           installCRDs: true
           global:
             priorityClassName: "system-cluster-critical"
