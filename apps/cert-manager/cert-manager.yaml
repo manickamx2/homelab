@@ -3,9 +3,10 @@ kind: Application
 metadata:
   name: cert-manager
 spec:
+  project: default
   sources:
     - chart: cert-manager
-      repoUrl: https://charts.jetstack.io
+      repoURL: https://charts.jetstack.io
       targetRevision: v1.19.2
       helm:
         releaseName: cert-manager
