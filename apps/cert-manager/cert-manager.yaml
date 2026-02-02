@@ -8,7 +8,7 @@ spec:
     - repoURL: 'https://github.com/manickamx2/homelab.git'
       targetRevision: main
       ref: homelab
-    - repoURL: oci://quay.io/jetstack/charts
+    - repoURL: https://charts.jetstack.io
       chart: cert-manager
       targetRevision: 1.19.2
       helm:
