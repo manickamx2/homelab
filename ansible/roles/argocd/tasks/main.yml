@@ -46,38 +46,33 @@
       spec:
         template:
           spec:
-            # 1. Mount the secret key and a shared volume for the plugin
+            # 1. Define an emptyDir volume which will hold the custom binaries
             volumes:
               - name: custom-tools
                 emptyDir: {}
               - name: sops-age
                 secret:
                   secretName: sops-age
-            # 2. Use an initContainer to install KSOPS
+            # 2. Use an init container to download/copy custom binaries into the emptyDir
             initContainers:
               - name: install-ksops
                 image: viaductoss/ksops:v4.3.3
                 command: ["/bin/sh", "-c"]
                 args:
-                  - cp /usr/local/bin/ksops /custom-tools/ksops;
-                    cp /usr/local/bin/kustomize /custom-tools/kustomize;
+                  - echo "Installing KSOPS...";
+                    mv ksops /custom-tools/;
+                    mv kustomize /custom-tools/;
+                    echo "Done.";
                 volumeMounts:
-                  - name: custom-tools
-                    mountPath: /custom-tools
-            # 3. Configure the main container to use the tools
+                  - mountPath: /custom-tools
+                    name: custom-tools
+            # 3. Volume mount the custom binary to the bin directory (overriding the existing version)
             containers:
               - name: argocd-repo-server
-                env:
-                  - name: XDG_CONFIG_HOME
-                    value: /.config
-                  - name: SOPS_AGE_KEY_FILE
-                    value: /.config/sops/age/keys.txt
                 volumeMounts:
-                  - name: custom-tools
-                    mountPath: /usr/local/bin/ksops
+                  - mountPath: /usr/local/bin/kustomize
+                    name: custom-tools
+                    subPath: kustomize
+                  - mountPath: /usr/local/bin/ksops
+                    name: custom-tools
                     subPath: ksops
-                  - name: sops-age
-                    mountPath: /.config/sops/age/keys.txt
-                    subPath: keys.txt
-
-
