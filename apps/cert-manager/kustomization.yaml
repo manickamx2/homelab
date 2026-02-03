@@ -12,3 +12,6 @@ helmCharts:
 
 resources:
   - ./resources/clusterissuer.yaml
+
+generators:
+  - ./ksops-generator.yaml
