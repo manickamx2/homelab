@@ -11,7 +11,7 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: argocd.manickamx2.net
+      hostname: argocd.manickamx2.com
       tls:
         mode: Terminate
         certificateRefs:
@@ -32,7 +32,7 @@ spec:
     - name: argocd-gateway
       namespace: argocd
   hostnames:
-    - argocd.manickamx2.net
+    - argocd.manickamx2.com
   rules:
     - matches:
         - path:
@@ -50,10 +50,10 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  commonName: argocd.manickamx2.net
+  commonName: argocd.manickamx2.com
   secretName: argocd-server-tls # Cert-manager will create/update this secret
   dnsNames:
-    - argocd.manickamx2.net
+    - argocd.manickamx2.com
   issuerRef:
     name: cloudflare-dns01-issuer # Must match your ClusterIssuer name
     kind: ClusterIssuer # Crucial: tells cert-manager to look globally
