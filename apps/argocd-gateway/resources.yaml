@@ -11,7 +11,7 @@ spec:
     - name: https
       protocol: HTTPS
       port: 443
-      hostname: argocd.manickam.local
+      hostname: argocd.manickamx2.net
       tls:
         mode: Terminate
         certificateRefs:
@@ -32,7 +32,7 @@ spec:
     - name: argocd-gateway
       namespace: argocd
   hostnames:
-    - argocd.manickam.local
+    - argocd.manickamx2.net
   rules:
     - matches:
         - path:
