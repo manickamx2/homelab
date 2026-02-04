@@ -45,14 +45,14 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: argocd-server-tls
+  name: argocd-server-certificate
   namespace: argocd # This must match where your Gateway/ArgoCD live
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
   secretName: argocd-server-tls # Cert-manager will create/update this secret
   dnsNames:
-    - argocd.manickam.local
+    - argocd.manickamx2.net
   issuerRef:
-    name: selfsigned-cluster-issuer # Must match your ClusterIssuer name
+    name: cloudflare-dns01-issuer # Must match your ClusterIssuer name
     kind: ClusterIssuer # Crucial: tells cert-manager to look globally
