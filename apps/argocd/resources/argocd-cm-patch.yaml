@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: argocd-cm
+  namespace: argocd
+data:
+  kustomize.buildOptions: "--enable-alpha-plugins --enable-helm --enable-exec"
+  url: https://argocd.manickamx2.com
+  server.insecure: true

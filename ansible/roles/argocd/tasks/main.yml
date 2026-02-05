@@ -1,3 +1,16 @@
+- name: Display bootstrap information
+  ansible.builtin.debug:
+    msg: |
+      ====================================================================
+      ARGOCD BOOTSTRAP
+      ====================================================================
+      This playbook performs initial ArgoCD installation only.
+      After the root ApplicationSet is deployed, ArgoCD will manage itself
+      from the apps/argocd/ directory in Git.
+      
+      Any future changes to ArgoCD should be made in Git, not in Ansible.
+      ====================================================================
+
 - name: Ensure argocd namespace exists
   kubernetes.core.k8s:
     kubeconfig: "{{ kubeconfig }}"
