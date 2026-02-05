@@ -1,4 +1,0 @@
-- name: Install HAProxy Ingress Controller into cluster
-  hosts: localhost
-  roles:
-    - haproxy_ingress_controller
