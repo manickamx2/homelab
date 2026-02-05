@@ -20,7 +20,7 @@ spec:
             group: ''
       allowedRoutes:
         namespaces:
-          from: Same
+          from: All
 ---
 apiVersion: gateway.networking.k8s.io/v1
 kind: HTTPRoute
