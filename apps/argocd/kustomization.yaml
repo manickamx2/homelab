@@ -9,5 +9,11 @@ resources:
 
 # Patch ArgoCD ConfigMap to enable kustomize plugins and repo server for KSOPS
 patches:
-  - path: ./resources/argocd-cm-patch.yaml
-  - path: ./resources/repo-server-patch.yaml
+  - target:
+      kind: ConfigMap
+      name: argocd-cm
+    path: ./resources/argocd-cm-patch.yaml
+  - target:
+      kind: Deployment
+      name: argocd-repo-server
+    path: ./resources/repo-server-patch.yaml
