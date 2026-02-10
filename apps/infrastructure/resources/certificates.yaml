@@ -1,0 +1,16 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: public-certificate
+  namespace: infrastructure # This must match where your Gateway lives
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  secretName: manickamx2-public-tls # Cert-manager will create/update this secret
+  dnsNames:
+    - "*.manickamx2.com"
+    - "manickamx2.com"
+  issuerRef:
+    name: cloudflare-dns01-issuer # Must match your ClusterIssuer name
+    kind: ClusterIssuer # Crucial: tells cert-manager to look globally
+    group: cert-manager.io
