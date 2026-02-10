@@ -3,5 +3,4 @@ kind: Kustomization
 
 resources:
   - ./resources/gateways.yaml
-  - ./resources/httproutes.yaml
   - ./resources/certificates.yaml

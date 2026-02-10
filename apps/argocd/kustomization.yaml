@@ -6,6 +6,7 @@ namespace: argocd
 resources:
   # Base ArgoCD installation
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+  - ./resources/httproute.yaml
 
 # Patch ArgoCD ConfigMap to enable kustomize plugins and repo server for KSOPS
 patches:
