@@ -2,48 +2,22 @@
 # https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
 
 authentik:
-  # The secret key is loaded from the SOPS-encrypted secret
   existingSecret:
     secretName: "authentik-secret"
-  # PostgreSQL configuration for embedded database
-  postgresql:
-    host: authentik-postgresql
-    name: authentik
-    user: authentik
-    password: file:///postgres-secrets/password
+  # This sends anonymous usage-data, stack traces on errors and
+  # performance data to sentry.io, and is fully opt-in
+  error_reporting:
+    enabled: true
 
-# Mount the PostgreSQL secret for password access
 server:
-  volumes:
-    - name: postgres-secrets
-      secret:
-        secretName: authentik-postgresql
-  volumeMounts:
-    - name: postgres-secrets
-      mountPath: /postgres-secrets
-      readOnly: true
+  route:
+    main:
+      enabled: true
+      hostnames:
+        - authentik.manickamx2.com
+      parentRefs:
+        - name: public-gateway
+          namespace: infrastructure
 
-worker:
-  volumes:
-    - name: postgres-secrets
-      secret:
-        secretName: authentik-postgresql
-  volumeMounts:
-    - name: postgres-secrets
-      mountPath: /postgres-secrets
-      readOnly: true
-
-# Error reporting (optional)
-error_reporting:
-  enabled: false
-
-# By default, the chart will deploy a PostgreSQL and Redis instance.
-# Passwords will be auto-generated and stored in secrets by Helm.
 postgresql:
-  enabled: true
-  auth:
-    username: authentik
-    database: authentik
-
-redis:
   enabled: true
