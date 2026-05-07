@@ -2,10 +2,10 @@
 # https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
 
 authentik:
-  # The secret key is loaded from the SOPS-encrypted secret via envFrom
-  envFrom:
-    - secretRef:
-        name: authentik-secret
+# The secret key is loaded from the SOPS-encrypted secret via envFrom
+envFrom:
+  - secretRef:
+      name: authentik-secret
 
   # Error reporting (optional)
   error_reporting:
