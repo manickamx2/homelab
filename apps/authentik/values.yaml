@@ -1,15 +1,15 @@
 # Authentik Helm Chart Values
 # https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
 
-authentik:
-# The secret key is loaded from the SOPS-encrypted secret via envFrom
+authentik: # The secret key is loaded from the SOPS-encrypted secret via envFrom
+
 envFrom:
   - secretRef:
       name: authentik-secret
 
-  # Error reporting (optional)
-  error_reporting:
-    enabled: false
+# Error reporting (optional)
+error_reporting:
+  enabled: false
 
 # We disable the chart's ingress because we use Gateway API (HTTPRoute)
 ingress:
