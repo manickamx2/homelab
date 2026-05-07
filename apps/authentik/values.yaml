@@ -5,6 +5,33 @@ authentik:
   # The secret key is loaded from the SOPS-encrypted secret
   existingSecret:
     secretName: "authentik-secret"
+  # PostgreSQL configuration for embedded database
+  postgresql:
+    host: authentik-postgresql
+    name: authentik
+    user: authentik
+    password: file:///postgres-secrets/password
+
+# Mount the PostgreSQL secret for password access
+server:
+  volumes:
+    - name: postgres-secrets
+      secret:
+        secretName: authentik-postgresql
+  volumeMounts:
+    - name: postgres-secrets
+      mountPath: /postgres-secrets
+      readOnly: true
+
+worker:
+  volumes:
+    - name: postgres-secrets
+      secret:
+        secretName: authentik-postgresql
+  volumeMounts:
+    - name: postgres-secrets
+      mountPath: /postgres-secrets
+      readOnly: true
 
 # Error reporting (optional)
 error_reporting:
