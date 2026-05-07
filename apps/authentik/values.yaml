@@ -1,0 +1,29 @@
+# Authentik Helm Chart Values
+# https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
+
+authentik:
+  # The secret key is loaded from the SOPS-encrypted secret via envFrom
+  envFrom:
+    - secretRef:
+        name: authentik-secret
+
+  # Error reporting (optional)
+  error_reporting:
+    enabled: false
+
+# We disable the chart's ingress because we use Gateway API (HTTPRoute)
+ingress:
+  enabled: false
+
+# By default, the chart will deploy a PostgreSQL and Redis instance.
+# Passwords will be auto-generated and stored in secrets by Helm.
+postgresql:
+  enabled: true
+  auth:
+    # If you want to specify a password, you can do so here
+    # password: "strong-db-password"
+    username: authentik
+    database: authentik
+
+redis:
+  enabled: true
