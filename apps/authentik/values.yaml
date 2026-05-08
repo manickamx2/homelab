@@ -1,9 +1,12 @@
 # Authentik Helm Chart Values
 # https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
 
+global:
+  envFrom:
+    - secretRef:
+        name: "authentik-secret"
+
 authentik:
-  existingSecret:
-    secretName: "authentik-secret"
   # This sends anonymous usage-data, stack traces on errors and
   # performance data to sentry.io, and is fully opt-in
   error_reporting:
