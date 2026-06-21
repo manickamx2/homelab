@@ -35,3 +35,7 @@ server:
 
 postgresql:
   enabled: true
+  auth:
+    existingSecret: authentik-postgresql
+    username: authentik
+    database: authentik
