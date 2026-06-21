@@ -11,8 +11,5 @@ helmCharts:
     namespace: authentik
     valuesFile: values.yaml
 
-resources:
-  - ./resources/httproute.yaml
-
 generators:
   - ./ksops-generator.yaml
