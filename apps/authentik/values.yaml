@@ -30,7 +30,9 @@ server:
       hostnames:
         - authentik.manickamx2.com
       parentRefs:
-        - name: public-gateway
+        - group: gateway.networking.k8s.io
+          kind: Gateway
+          name: public-gateway
           namespace: infrastructure
 
 postgresql:
