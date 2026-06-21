@@ -8,3 +8,4 @@ annotations:
       path: ksops
 files:
   - ./resources/authentik-secret.yaml
+  - ./resources/postgresql-secret.yaml
