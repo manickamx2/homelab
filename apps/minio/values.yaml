@@ -1,0 +1,39 @@
+# MinIO Helm Chart Values
+# https://github.com/bitnami/charts/blob/main/bitnami/minio/values.yaml
+
+mode: standalone
+
+auth:
+  existingSecret: minio-root-credentials
+  rootUserSecretKey: root-user
+  rootPasswordSecretKey: root-password
+
+persistence:
+  enabled: true
+  storageClass: local-path
+  size: 20Gi
+
+provisioning:
+  enabled: true
+  buckets:
+    - name: terraform-state
+      region: us-east-1
+      versioning: Versioned
+
+service:
+  type: ClusterIP
+  ports:
+    api: 9000
+
+console:
+  enabled: true
+  service:
+    type: ClusterIP
+    ports:
+      http: 9090
+
+resourcesPreset: micro
+
+networkPolicy:
+  enabled: true
+  allowExternal: true
