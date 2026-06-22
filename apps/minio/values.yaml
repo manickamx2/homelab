@@ -3,6 +3,14 @@
 
 mode: standalone
 
+image:
+  repository: bitnamilegacy/minio
+
+defaultInitContainers:
+  volumePermissions:
+    image:
+      repository: bitnamilegacy/os-shell
+
 auth:
   existingSecret: minio-root-credentials
   rootUserSecretKey: root-user
@@ -27,6 +35,8 @@ service:
 
 console:
   enabled: true
+  image:
+    repository: bitnamilegacy/minio-object-browser
   service:
     type: ClusterIP
     ports:
