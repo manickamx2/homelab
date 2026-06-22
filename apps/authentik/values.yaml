@@ -2,11 +2,6 @@
 # https://github.com/goauthentik/helm/blob/main/charts/authentik/values.yaml
 
 global:
-  image:
-    # Temporarily pinned to 2025.10.3 to bypass a fresh-install bug in 2025.12+
-    # Bug: "relation authentik_core_group does not exist" in to_2025_12_group_duplicate.py
-    # Ref: https://github.com/goauthentik/authentik/issues/20667
-    tag: "2025.10.3"
   envFrom:
     - secretRef:
         name: "authentik-secret"
