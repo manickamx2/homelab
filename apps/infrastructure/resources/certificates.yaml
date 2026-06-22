@@ -14,3 +14,19 @@ spec:
     name: cloudflare-dns01-issuer # Must match your ClusterIssuer name
     kind: ClusterIssuer # Crucial: tells cert-manager to look globally
     group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: internal-certificate
+  namespace: infrastructure
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  secretName: manickamx2-internal-tls
+  dnsNames:
+    - "*.internal.manickamx2.com"
+  issuerRef:
+    name: cloudflare-dns01-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
