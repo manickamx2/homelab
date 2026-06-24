@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: coredns-custom
+  namespace: kube-system
+data:
+  manickamx2.server: |
+    # Delegate homelab DNS to the router so pods use the same split-horizon records as LAN clients.
+    manickamx2.com:53 {
+        errors
+        cache 30
+        forward . 192.168.1.1
+    }
