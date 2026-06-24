@@ -9,3 +9,9 @@ variable "authentik_token" {
   type        = string
   sensitive   = true
 }
+
+variable "bootstrap_argocd_admin_usernames" {
+  description = "Existing authentik usernames to add to the argocd-admins group."
+  type        = set(string)
+  default     = []
+}

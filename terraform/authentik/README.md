@@ -22,3 +22,9 @@ terraform output -raw argocd_client_secret
 ```
 
 After the first apply, store `argocd_client_secret` in the SOPS-managed ArgoCD OIDC secret as `oidc.authentik.clientSecret`.
+
+To grant initial ArgoCD admin access, set existing authentik usernames in your ignored `local.auto.tfvars` file:
+
+```hcl
+bootstrap_argocd_admin_usernames = ["your-username"]
+```
