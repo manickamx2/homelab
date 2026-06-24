@@ -7,3 +7,13 @@ data:
   kustomize.buildOptions: "--enable-alpha-plugins --enable-helm --enable-exec"
   url: "https://argocd.manickamx2.com"
   server.insecure: "true"
+  oidc.config: |
+    name: authentik
+    issuer: https://authentik.manickamx2.com/application/o/argocd/
+    clientID: argocd
+    clientSecret: $argocd-oidc-secret:oidc.authentik.clientSecret
+    requestedScopes:
+      - openid
+      - profile
+      - email
+      - groups

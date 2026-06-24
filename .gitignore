@@ -1,1 +1,10 @@
+# k8s
 kubeconfig.yaml
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+*.tfplan
+backend.local.hcl

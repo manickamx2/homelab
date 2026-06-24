@@ -8,12 +8,19 @@ resources:
   - https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
   - ./resources/httproute.yaml
 
+generators:
+  - ./ksops-generator.yaml
+
 # Patch ArgoCD ConfigMap to enable kustomize plugins and repo server for KSOPS
 patches:
   - target:
       kind: ConfigMap
       name: argocd-cm
     path: ./resources/argocd-cm-patch.yaml
+  - target:
+      kind: ConfigMap
+      name: argocd-rbac-cm
+    path: ./resources/argocd-rbac-cm-patch.yaml
   - target:
       kind: Deployment
       name: argocd-repo-server
