@@ -1,5 +1,12 @@
 # Homelab
 
+## June 2026
+### 06/21/2026 - 06/23/2026
+* Installed Authentik
+* Provisioned MinIO for Terraform state backend management
+* Set up Terraform for future infrastructure resources and used it to configure Authentik OIDC access for ArgoCD
+* Added a CoreDNS custom forwarder for `manickamx2.com` so cluster pods resolve homelab hostnames through the router’s split-horizon DNS records
+
 ## January 2026
 I bought a mini PC to play around with and practice/improve my GitOps chops in a personal setting. I'm not
 entirely sure what all I intend to do with this, but it gives me a nice, low stakes environment to improve
