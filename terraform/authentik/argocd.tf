@@ -14,6 +14,10 @@ data "authentik_property_mapping_provider_scope" "default_oauth_scopes" {
   ]
 }
 
+data "authentik_certificate_key_pair" "self_signed" {
+  name = "authentik Self-signed Certificate"
+}
+
 resource "authentik_property_mapping_provider_scope" "groups" {
   name       = "ArgoCD groups"
   scope_name = "groups"
@@ -29,6 +33,7 @@ resource "authentik_provider_oauth2" "argocd" {
   client_id          = "argocd"
   authorization_flow = data.authentik_flow.default_authorization.id
   invalidation_flow  = data.authentik_flow.default_invalidation.id
+  signing_key        = data.authentik_certificate_key_pair.self_signed.id
 
   allowed_redirect_uris = [
     {
