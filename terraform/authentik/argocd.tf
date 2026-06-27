@@ -38,7 +38,7 @@ resource "authentik_provider_oauth2" "argocd" {
   allowed_redirect_uris = [
     {
       matching_mode = "strict"
-      url           = "https://argocd.manickamx2.com/auth/callback"
+      url           = "https://argocd.internal.manickamx2.com/auth/callback"
     }
   ]
 

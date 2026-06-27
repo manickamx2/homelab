@@ -5,12 +5,12 @@ metadata:
   namespace: infrastructure
 spec:
   parentRefs:
-    - name: public-gateway
+    - name: private-gateway
       namespace: infrastructure
       kind: Gateway
       group: gateway.networking.k8s.io
   hostnames:
-    - argocd.manickamx2.com
+    - argocd.internal.manickamx2.com
   rules:
     - matches:
         - path:

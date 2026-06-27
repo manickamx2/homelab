@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 data:
   kustomize.buildOptions: "--enable-alpha-plugins --enable-helm --enable-exec"
-  url: "https://argocd.manickamx2.com"
+  url: "https://argocd.internal.manickamx2.com"
   server.insecure: "true"
   oidc.config: |
     name: authentik
